@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head> 
+<body>
+
+<div id="back">
+<div class="topnav" id="myTopnav">
+    <a href="{{ url_for('home') }}" id="active"><img src="{{ url_for('static', filename='newram.png') }}" id="logo"></a>
+    <a href="{{ url_for('about') }}">BIOGRAPHY</a>
+    <a href="{{ url_for('concerts') }}">CONCERTS</a>
+    <a href="{{ url_for('merch') }}">MERCH</a>
+    <a href="{{ url_for('songs') }}">SONGS</a>
+    <a href="{{ url_for('blog') }}">BLOG</a>
+    <a href="http://dupontmanual.com" target="_blank">SCHOOL</a>
+    <a href="https://www.manualtsa.com/" target="_blank">TSA</a>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('new_post') }}">POST</a>
+    <a href="{{ url_for('account') }}">ACCOUNT</a>
+    <a href="{{ url_for('logout') }}">LOGOUT</a>
+    {% else %}
+    <a href="{{ url_for('login') }}">LOGIN</a>
+    <a href="{{ url_for('register') }}">REGISTER</a>
+    {% endif %}
+
+
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+<div id="main">
+    Midsummer Madness
+</div>
+</div>
+<div class="content bio" data-aos="fade-up">
+    <h3>Who Are We?</h3>
+    <p>
+        We are Midsummer Madness! Our names are Alpha, Beta, and Gamma and we are a local and up and coming band looking to create music all of you will love. We play many kinds of instruments and beats, but our favorite ones are acoustics. We drop some HOT music like it's the summer!. 
+    </p>
+    <a href="{{ url_for('about') }}"><div class="more">More</div></a>
+</div>
+<div class="content song" id="hit" data-aos="fade-up">
+    <h3>Latest Hit Song</h3>
+    <h4>Summer</h4>
+    <div class="container"><a href="{{ url_for('static', filename='summer.mp3') }}" download>
+    <img class="hit image" src="{{ url_for('static', filename='summer.jpg') }}" alt="Avatar">
+    <div class="middle">
+    <div><img class="download" src="{{ url_for('static', filename='download.png') }}"></div>
+    </div>
+    </a>
+  </div>
+
+    <audio controls class="hit">
+    <source src="{{ url_for('static', filename='summer.mp3') }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+    <a href="{{ url_for('songs') }}"><div class="more">More</div></a>
+</div>
+<div class="content" data-aos="fade-up">
+    <h3>Next Upcoming Concert</h3>
+    <form method="POST"  action="{{ url_for('buyTicket') }}">
+    <div class="concert">
+        <input type = "hidden" name = "date" value = "Wednesday, April 24,2019" ><div class="date">Wednesday, April 24,2019</br><input type = "hidden" name = "time" value = "8:00 PM EST" >8:00 PM EST</div>
+        <div class="area">Midsummer Madness</br><img class="location" src="{{ url_for('static', filename='location.png') }}"><input type = "hidden" name = "arena" value = "KFC Yum! Center, Louisville, KY" >KFC Yum! Center, Louisville, KY</div>
+        <div class="price"><input type = "hidden" name = "price" value = "50" ><span class="priceText">Price: $50</span> </br><button type="submit" class="button">Buy</button></div>
+    </div>
+</form>
+    <a href="{{ url_for('concerts') }}"><div class="more">More</div></a>
+</div>
+<div class="content" data-aos="fade-up">
+  <h3>Merchandise</h3>
+  <div id="merchHome">
+  <a href="{{ url_for('merch') }}"><div class="container">
+    <img src="{{ url_for('static', filename='shirt2.jpg') }}" alt="Avatar" class="image">
+    <div class="middle">Price: $20
+      <div class="text">Buy</div>
+    </div>
+  </div> </a>
+  <a href="{{ url_for('merch') }}"><div class="container">
+    <img src="{{ url_for('static', filename='hat2.jpg') }}" alt="Avatar" class="image">
+    <div class="middle">Price: $10
+      <div class="text">Buy</div>
+    </div>
+  </div></a>
+  <a href="{{ url_for('merch') }}"><div class="container">
+    <img src="{{ url_for('static', filename='sticker2.jpg') }}" alt="Avatar" class="image">
+    <div class="middle">Price $5
+      <div class="text">Buy</div>
+    </div>
+</div></a>
+</div>
+</div> 
+
+
+<footer>
+  Made by Renz Tolentino, Music: https://www.bensound.com
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+
+<script>
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+var nav = document.getElementsByClassName('topnav');
+var cont = document.getElementsByClassName('content');
+
+/* Responsive with width */
+
+var width = Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+);
+
+if(width>651){
+    document.getElementById("myTopnav").style.fontSize=.95/(1200/width)+"em";
+    document.getElementById("main").style.height=700/(1200/width)+"px";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .95/(1200/width)+"em";
+    }
+}
+else{
+    document.getElementById("myTopnav").style.backgroundColor="#254D67";
+    document.getElementById("active").style.backgroundColor="#428096";
+    document.getElementById("myTopnav").style.fontSize=.9+"em";
+    document.getElementById("main").style.height=500+"px";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .65+"em";
+    }
+
+}
+document.getElementById("main").style.fontSize=4/(750/width)+"em";
+document.getElementById("logo").style.height=70/(1200/width)+"px";
+for (var i = 0; i < nav.length; i++) {
+  nav[i].style.lineHeight = 70/(1200/width)+"px";
+}
+
+window.onresize = function getWidth() {
+
+  var currentPosition = window.pageYOffset || document.documentElement.scrollTop;
+  var width = Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+  if(width>651){
+    document.getElementById("myTopnav").style.fontSize=.95/(1200/width)+"em";
+    document.getElementById("main").style.height=700/(1200/width)+"px";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .95/(1200/width)+"em";
+    }
+  }
+  else{
+    document.getElementById("main").style.height=500+"px";
+    document.getElementById("myTopnav").style.fontSize=.9+"em";
+    document.getElementById("myTopnav").style.backgroundColor="#254D67";
+    document.getElementById("active").style.backgroundColor="#428096";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .65+"em";
+    }
+  }
+  if(width>651 && currentPosition==0){
+    document.getElementById("myTopnav").style.backgroundColor="transparent";
+     document.getElementById("active").style.backgroundColor="transparent";
+
+
+  }
+  document.getElementById("main").style.fontSize=4/(750/width)+"em";
+  document.getElementById("logo").style.height=70/(1200/width)+"px";
+
+  for (var i = 0; i < nav.length; i++) {
+    nav[i].style.lineHeight = 70/(1200/width)+"px";
+  }
+
+}
+
+/* Navbar background as it follows screen */
+
+window.onscroll = function() {
+  var currentPosition = window.pageYOffset || document.documentElement.scrollTop;
+    var width = Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+  if (currentPosition>0) {
+    document.getElementById("myTopnav").style.backgroundColor="#254D67";
+    document.getElementById("active").style.backgroundColor="#428096";
+
+  }else if(width<651){
+    document.getElementById("myTopnav").style.backgroundColor="#254D67";
+    document.getElementById("active").style.backgroundColor="#428096";
+
+  }else{
+    document.getElementById("myTopnav").style.backgroundColor="transparent";
+    document.getElementById("active").style.backgroundColor="transparent";
+
+
+  }
+
+
+}
+
+</script>
+</html>
+

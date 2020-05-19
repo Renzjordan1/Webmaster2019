@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head> 
+<body>
+
+<div class="topnav" id="myTopnav">
+    <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='newram.png') }}" id="logo"></a>
+    <a href="{{ url_for('about') }}">BIOGRAPHY</a>
+    <a href="{{ url_for('concerts') }}">CONCERTS</a>
+    <a href="{{ url_for('merch') }}">MERCH</a>
+    <a href="{{ url_for('songs') }}">SONGS</a>
+    <a href="{{ url_for('blog') }}">BLOG</a>
+    <a href="http://dupontmanual.com" target="_blank">SCHOOL</a>
+    <a href="https://www.manualtsa.com/" target="_blank">TSA</a>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('new_post') }}">POST</a>
+    <a href="{{ url_for('account') }}">ACCOUNT</a>
+    <a href="{{ url_for('logout') }}">LOGOUT</a>
+    {% else %}
+    <a href="{{ url_for('login') }}">LOGIN</a>
+    <a href="{{ url_for('register') }}">REGISTER</a>
+    {% endif %}
+
+
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
+
+<div class="content" id="info">
+  {% if x==0 %}
+  <h5> You are buying {{ quantity }} ticket(s) for {{ date}}, {{ time }} at {{ arena }}</br> Total: ${{total}} </h5>
+  {% else %}
+  <h5>
+  {% if shirts!=0 %} You are buying {{shirts}} shirt(s)</br>{% endif %}
+  {% if hats!=0 %} You are buying {{hats}} hat(s)</br>{% endif %}
+  {% if stickers!=0 %} You are buying {{stickers}} sticker(s) </br>{% endif %}
+  Total: ${{total}}
+  </h5>
+  {% endif %}
+  <form onsubmit="bought()" id="buyMerch" method="POST"  action="{{ url_for('purchase') }}">
+    {% if x==0 %}
+    <input type = "hidden" name ="date" value = '{{ date }}' >
+    <input type = "hidden" name ="time" value = '{{ time }}' >
+    <input type = "hidden" name ="arena" value = '{{ arena }}' >
+    <input type = "hidden" name ="quantity" value = '{{ quantity }}' >
+    {% else %}
+    <input type = "hidden" name ="shirts" value = '{{ shirts }}' >
+    <input type = "hidden" name ="hats" value = '{{ hats }}' >
+    <input type = "hidden" name ="stickers" value = '{{ stickers }}' >
+    {% endif %}
+    <input type = "hidden" name ="total" value = '{{ total }}' >
+    <input class="pur" type="text" name="first" placeholder="First Name" required></br>
+    <input class="pur" type="text" name="last" placeholder="Last Name" required></br>
+    <input class="pur" type="email" name="mail" placeholder="Email" required></br>
+    <input class="pur" type="number" onKeyDown="if(this.value.length==19) return false;" placeholder="Credit Card No." required></br>
+  <button type="submit" class="button" id="item">Purchase</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+
+<script>
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function bought() {
+  alert("Thank you for the purchase! Receipt will be emailed shortly.");
+}
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+document.getElementById("myTopnav").style.backgroundColor="#254D67";
+var nav = document.getElementsByClassName('topnav');
+var cont = document.getElementsByClassName('content');
+
+/* Responsive with width */
+
+var width = Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+);
+
+if(width>651){
+    document.getElementById("myTopnav").style.fontSize=.95/(1200/width)+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .95/(1200/width)+"em";
+    }
+}
+else{
+    document.getElementById("myTopnav").style.backgroundColor="#254D67";
+    document.getElementById("myTopnav").style.fontSize=.9+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .65+"em";
+    }
+
+}
+document.getElementById("logo").style.height=70/(1200/width)+"px";
+document.getElementById("info").style.marginTop=200/(1200/width)+"px";
+
+for (var i = 0; i < nav.length; i++) {
+  nav[i].style.lineHeight = 70/(1200/width)+"px";
+}
+
+window.onresize = function getWidth() {
+
+  var currentPosition = window.pageYOffset || document.documentElement.scrollTop;
+  var width = Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+  if(width>651){
+    document.getElementById("myTopnav").style.fontSize=.95/(1200/width)+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .95/(1200/width)+"em";
+    }
+  }
+  else{
+    document.getElementById("myTopnav").style.fontSize=.9+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .65+"em";
+    }
+  }
+
+  document.getElementById("main").style.fontSize=4/(750/width)+"em";
+  document.getElementById("logo").style.height=70/(1200/width)+"px";
+  document.getElementById("info").style.marginTop=200/(1200/width)+"px";
+
+
+  for (var i = 0; i < nav.length; i++) {
+    nav[i].style.lineHeight = 70/(1200/width)+"px";
+  }
+
+}
+
+
+</script>
+</html>
+

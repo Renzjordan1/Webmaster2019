@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main2.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head> 
+<body>
+
+<div class="topnav" id="myTopnav">
+    <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='newram.png') }}" id="logo"></a>
+    <a href="{{ url_for('about') }}">BIOGRAPHY</a>
+    <a href="{{ url_for('concerts') }}">CONCERTS</a>
+    <a href="{{ url_for('merch') }}">MERCH</a>
+    <a href="{{ url_for('songs') }}">SONGS</a>
+    <a href="{{ url_for('blog') }}">BLOG</a>
+    <a href="http://dupontmanual.com" target="_blank">SCHOOL</a>
+    <a href="https://www.manualtsa.com/" target="_blank">TSA</a>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('new_post') }}" id="active">POST</a>
+    <a href="{{ url_for('account') }}">ACCOUNT</a>
+    <a href="{{ url_for('logout') }}">LOGOUT</a>
+    {% else %}
+    <a href="{{ url_for('login') }}">LOGIN</a>
+    <a href="{{ url_for('register') }}">REGISTER</a>
+    {% endif %}
+
+
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
+
+
+<div class="content" id="info">
+ <div class='content-section'>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class='form-group'>
+                <legend class="border-bottom mb-4">{{legend}}</legend>
+                <div class="form-group">
+                    {{ form.title.label(class="form-control-label") }}
+                    {% if form.title.errors %}
+                        {{ form.title(class="form-control form-control-lg  is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.title(class="form-control form-control-lg") }}
+                    {% endif %} 
+                </div>               
+                <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+                    {% if form.content.errors %}
+                        {{ form.content(class="form-control form-control-lg  is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>          
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info")}}  
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+
+<script>
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+document.getElementById("myTopnav").style.backgroundColor="#254D67";
+var nav = document.getElementsByClassName('topnav');
+var cont = document.getElementsByClassName('content');
+
+/* Responsive with width */
+
+var width = Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+);
+
+if(width>651){
+    document.getElementById("myTopnav").style.fontSize=.95/(1200/width)+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .95/(1200/width)+"em";
+    }
+}
+else{
+    document.getElementById("myTopnav").style.backgroundColor="#254D67";
+    document.getElementById("myTopnav").style.fontSize=.9+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .65+"em";
+    }
+
+}
+document.getElementById("logo").style.height=70/(1200/width)+"px";
+document.getElementById("info").style.marginTop=200/(1200/width)+"px";
+
+for (var i = 0; i < nav.length; i++) {
+  nav[i].style.lineHeight = 70/(1200/width)+"px";
+}
+
+window.onresize = function getWidth() {
+
+  var currentPosition = window.pageYOffset || document.documentElement.scrollTop;
+  var width = Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+  if(width>651){
+    document.getElementById("myTopnav").style.fontSize=.95/(1200/width)+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .95/(1200/width)+"em";
+    }
+  }
+  else{
+    document.getElementById("myTopnav").style.fontSize=.9+"em";
+    for (var i = 0; i < cont.length; i++) {
+        cont[i].style.fontSize = .65+"em";
+    }
+  }
+
+  document.getElementById("main").style.fontSize=4/(750/width)+"em";
+  document.getElementById("logo").style.height=70/(1200/width)+"px";
+  document.getElementById("info").style.marginTop=200/(1200/width)+"px";
+
+
+  for (var i = 0; i < nav.length; i++) {
+    nav[i].style.lineHeight = 70/(1200/width)+"px";
+  }
+
+}
+
+
+</script>
+</html>
+
