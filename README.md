@@ -15,6 +15,7 @@ This web app is currently deployed on https://webmaster-2019-renzjordan.onrender
 
 * Concert Searching
 * Ticket and Merch Purchasing
+* Download Songs
 * Account System
   * Hashed Passwords
   * Unique email for each account
