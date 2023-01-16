@@ -22,8 +22,8 @@ This web app is currently deployed on https://webmaster-2019-renzjordan.onrender
   * Ability to change email, username, and password
   * Profile pictures
 * Blog System
-  * User accounts can make blog posts that all users see
-  * Can see all posts made by a user
+  * User accounts can make blog posts that everyone can see
+  * Ability to see a user's post history
   * Users can update or delete posts they've made
 * Responsive Design
   
