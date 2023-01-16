@@ -4,7 +4,7 @@
 For the 2019 KYTSA Webmaster High School competition, the challenge was to make a website for a band. The requirements included pages that gives info about songs, merchandise, 
 concerts, and a blog where users can talk. Additionally, links to your school's websites are required. <br/><br/>
 I built my website using Flask. As well as meeting the challenge requirements, I added additional quality of life features. 
-Users can search for concerts, purchase tickets, purchase merchandise, and create an account for users to post blogs and view post history.
+Users can search for concerts, purchase tickets, purchase merchandise, and create an account for users to post blogs.
 Purchases made are fake and only send email receipts from a mailing account. Blog posts and accounts are stored in a SQLite database.
 *This app has been tested to work on desktop and mobile devices.*
 
