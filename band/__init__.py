@@ -8,7 +8,13 @@ import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
+    
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
