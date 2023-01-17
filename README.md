@@ -8,7 +8,7 @@ Users can search for concerts, purchase tickets, purchase merchandise, and creat
 Purchases made are fake and only send email receipts from a mailing account. Blog posts and accounts are stored in a SQLite database.
 *This app has been tested to work on desktop and mobile devices.*
 
-This web app is currently deployed on https://webmaster-2019-renzjordan.onrender.com/. However, Render's free plan resets the SQLite db whenever the server restarts. (as of Jan. 2023).
+This web app is currently deployed on http://renzjordan8.pythonanywhere.com/home (as of Jan. 2023)
 <br/>
 
 ## Features
